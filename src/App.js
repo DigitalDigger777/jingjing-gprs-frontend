@@ -177,7 +177,7 @@ class App extends Component {
                     </form>
 
                     <Snackbar
-                        anchorOrigin={{ 'bottom', 'center' }}
+                        anchorOrigin={{ vertical: `bottom`, horizontal: `center` }}
                         open={this.state.snackBar.open}
                         onClose={this.handleClose}
                         ContentProps={{
