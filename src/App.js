@@ -10,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import Snackbar from '@material-ui/core/Snackbar';
 import axios from 'axios';
 
 //import logo from './logo.svg';
@@ -51,12 +52,25 @@ class App extends Component {
         this.state = {
             boardId: '',
             minutes: 0,
-            disableButtons: false
+            disableButtons: false,
+            snackBar: {
+                open: false,
+                message: ''
+            }
         };
     }
 
     handleChange = event => {
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    handleClose = () => {
+        this.setState({
+            snackBar: {
+                open: false,
+                message: ''
+            }
+        });
     }
 
     start = (event, minutes) => {
@@ -67,10 +81,19 @@ class App extends Component {
             boardId: this.state.boardId,
             timeout: minutes * 60
         })
-            .then(function (response) {
+            .then(response => {
                 this.setState({
                     disableButtons: true
                 });
+
+                if (typeof response.data.error != 'undefined') {
+                    this.setState({
+                        snackBar: {
+                            open: true,
+                            message: response.data.error.message
+                        }
+                    });
+                }
             })
             .catch(function (error) {
 
@@ -152,6 +175,16 @@ class App extends Component {
                             </Button>
                         </div>
                     </form>
+
+                    <Snackbar
+                        anchorOrigin={{ 'bottom', 'center' }}
+                        open={this.state.snackBar.open}
+                        onClose={this.handleClose}
+                        ContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.snackBar.message}</span>}
+                    />
                 </Paper>
             </div>
         );
