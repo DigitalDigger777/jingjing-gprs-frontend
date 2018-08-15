@@ -93,6 +93,16 @@ class App extends Component {
                             message: response.data.error.message
                         }
                     });
+
+                    setTimeout(() => {
+                        this.setState({
+                            snackBar: {
+                                open: false,
+                                message: response.data.error.message,
+                                disableButtons: true
+                            }
+                        });
+                    }, 3000);
                 }
             })
             .catch(function (error) {
