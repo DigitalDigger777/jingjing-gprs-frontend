@@ -98,9 +98,9 @@ class App extends Component {
                         this.setState({
                             snackBar: {
                                 open: false,
-                                message: '',
-                                disableButtons: false
-                            }
+                                message: ''
+                            },
+                            disableButtons: false
                         });
                     }, 3000);
                 }
