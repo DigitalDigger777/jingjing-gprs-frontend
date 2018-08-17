@@ -77,7 +77,7 @@ class App extends Component {
         //alert(this.state.sim);
         //alert(this.state.imei);
         //alert(minutes);
-        axios.post('http://jingjing.fenglinfl.com/public/index.php/gprs/queue/add', {
+        axios.post('http://jingjing.fenglinfl.com/public/index.php/gprs/onenet/relay/enable', {
             boardId: this.state.boardId,
             timeout: minutes * 60
         })
@@ -86,11 +86,11 @@ class App extends Component {
                     disableButtons: true
                 });
 
-                if (typeof response.data.error != 'undefined') {
+                if (typeof response.data.contents.error != 'undefined') {
                     this.setState({
                         snackBar: {
                             open: true,
-                            message: response.data.error.message
+                            message: response.data.contents.error
                         }
                     });
 
@@ -98,8 +98,8 @@ class App extends Component {
                         this.setState({
                             snackBar: {
                                 open: false,
-                                message: response.data.error.message,
-                                disableButtons: true
+                                message: '',
+                                disableButtons: false
                             }
                         });
                     }, 3000);
