@@ -78,7 +78,7 @@ class App extends Component {
         //alert(this.state.imei);
         //alert(minutes);
         axios.post('http://jingjing.fenglinfl.com/public/index.php/gprs/onenet/relay/enable', {
-            boardId: this.state.boardId,
+            deviceId: this.state.boardId,
             timeout: minutes * 60
         })
             .then(response => {
