@@ -122,7 +122,7 @@ class App extends Component {
                             <TextField
                                 required
                                 id="required"
-                                label="Board ID"
+                                label="Device ID"
                                 defaultValue=""
                                 className={classes.textField}
                                 margin="normal"
